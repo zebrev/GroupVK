@@ -1,0 +1,530 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C079F941F6C1EF100836669 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C079F931F6C1EF100836669 /* AppDelegate.swift */; };
+		5C079F961F6C1EF100836669 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C079F951F6C1EF100836669 /* ViewController.swift */; };
+		5C079F991F6C1EF100836669 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C079F971F6C1EF100836669 /* Main.storyboard */; };
+		5C079F9B1F6C1EF100836669 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C079F9A1F6C1EF100836669 /* Assets.xcassets */; };
+		5C079F9E1F6C1EF100836669 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C079F9C1F6C1EF100836669 /* LaunchScreen.storyboard */; };
+		5C079FA91F6C1EF100836669 /* Weather_ZebrevTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C079FA81F6C1EF100836669 /* Weather_ZebrevTests.swift */; };
+		5C079FB41F6C1EF100836669 /* Weather_ZebrevUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C079FB31F6C1EF100836669 /* Weather_ZebrevUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5C079FA51F6C1EF100836669 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C079F881F6C1EF100836669 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C079F8F1F6C1EF100836669;
+			remoteInfo = Weather_Zebrev;
+		};
+		5C079FB01F6C1EF100836669 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C079F881F6C1EF100836669 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C079F8F1F6C1EF100836669;
+			remoteInfo = Weather_Zebrev;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5C079F901F6C1EF100836669 /* Weather_Zebrev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather_Zebrev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C079F931F6C1EF100836669 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5C079F951F6C1EF100836669 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5C079F981F6C1EF100836669 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5C079F9A1F6C1EF100836669 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5C079F9D1F6C1EF100836669 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5C079F9F1F6C1EF100836669 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C079FA41F6C1EF100836669 /* Weather_ZebrevTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Weather_ZebrevTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C079FA81F6C1EF100836669 /* Weather_ZebrevTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_ZebrevTests.swift; sourceTree = "<group>"; };
+		5C079FAA1F6C1EF100836669 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C079FAF1F6C1EF100836669 /* Weather_ZebrevUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Weather_ZebrevUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C079FB31F6C1EF100836669 /* Weather_ZebrevUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_ZebrevUITests.swift; sourceTree = "<group>"; };
+		5C079FB51F6C1EF100836669 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5C079F8D1F6C1EF100836669 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C079FA11F6C1EF100836669 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C079FAC1F6C1EF100836669 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C079F871F6C1EF100836669 = {
+			isa = PBXGroup;
+			children = (
+				5C079F921F6C1EF100836669 /* Weather_Zebrev */,
+				5C079FA71F6C1EF100836669 /* Weather_ZebrevTests */,
+				5C079FB21F6C1EF100836669 /* Weather_ZebrevUITests */,
+				5C079F911F6C1EF100836669 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5C079F911F6C1EF100836669 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C079F901F6C1EF100836669 /* Weather_Zebrev.app */,
+				5C079FA41F6C1EF100836669 /* Weather_ZebrevTests.xctest */,
+				5C079FAF1F6C1EF100836669 /* Weather_ZebrevUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C079F921F6C1EF100836669 /* Weather_Zebrev */ = {
+			isa = PBXGroup;
+			children = (
+				5C079F931F6C1EF100836669 /* AppDelegate.swift */,
+				5C079F951F6C1EF100836669 /* ViewController.swift */,
+				5C079F971F6C1EF100836669 /* Main.storyboard */,
+				5C079F9A1F6C1EF100836669 /* Assets.xcassets */,
+				5C079F9C1F6C1EF100836669 /* LaunchScreen.storyboard */,
+				5C079F9F1F6C1EF100836669 /* Info.plist */,
+			);
+			path = Weather_Zebrev;
+			sourceTree = "<group>";
+		};
+		5C079FA71F6C1EF100836669 /* Weather_ZebrevTests */ = {
+			isa = PBXGroup;
+			children = (
+				5C079FA81F6C1EF100836669 /* Weather_ZebrevTests.swift */,
+				5C079FAA1F6C1EF100836669 /* Info.plist */,
+			);
+			path = Weather_ZebrevTests;
+			sourceTree = "<group>";
+		};
+		5C079FB21F6C1EF100836669 /* Weather_ZebrevUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5C079FB31F6C1EF100836669 /* Weather_ZebrevUITests.swift */,
+				5C079FB51F6C1EF100836669 /* Info.plist */,
+			);
+			path = Weather_ZebrevUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C079F8F1F6C1EF100836669 /* Weather_Zebrev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C079FB81F6C1EF100836669 /* Build configuration list for PBXNativeTarget "Weather_Zebrev" */;
+			buildPhases = (
+				5C079F8C1F6C1EF100836669 /* Sources */,
+				5C079F8D1F6C1EF100836669 /* Frameworks */,
+				5C079F8E1F6C1EF100836669 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Weather_Zebrev;
+			productName = Weather_Zebrev;
+			productReference = 5C079F901F6C1EF100836669 /* Weather_Zebrev.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5C079FA31F6C1EF100836669 /* Weather_ZebrevTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C079FBB1F6C1EF100836669 /* Build configuration list for PBXNativeTarget "Weather_ZebrevTests" */;
+			buildPhases = (
+				5C079FA01F6C1EF100836669 /* Sources */,
+				5C079FA11F6C1EF100836669 /* Frameworks */,
+				5C079FA21F6C1EF100836669 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C079FA61F6C1EF100836669 /* PBXTargetDependency */,
+			);
+			name = Weather_ZebrevTests;
+			productName = Weather_ZebrevTests;
+			productReference = 5C079FA41F6C1EF100836669 /* Weather_ZebrevTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5C079FAE1F6C1EF100836669 /* Weather_ZebrevUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C079FBE1F6C1EF100836669 /* Build configuration list for PBXNativeTarget "Weather_ZebrevUITests" */;
+			buildPhases = (
+				5C079FAB1F6C1EF100836669 /* Sources */,
+				5C079FAC1F6C1EF100836669 /* Frameworks */,
+				5C079FAD1F6C1EF100836669 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C079FB11F6C1EF100836669 /* PBXTargetDependency */,
+			);
+			name = Weather_ZebrevUITests;
+			productName = Weather_ZebrevUITests;
+			productReference = 5C079FAF1F6C1EF100836669 /* Weather_ZebrevUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5C079F881F6C1EF100836669 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Rapax;
+				TargetAttributes = {
+					5C079F8F1F6C1EF100836669 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
+					5C079FA31F6C1EF100836669 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5C079F8F1F6C1EF100836669;
+					};
+					5C079FAE1F6C1EF100836669 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5C079F8F1F6C1EF100836669;
+					};
+				};
+			};
+			buildConfigurationList = 5C079F8B1F6C1EF100836669 /* Build configuration list for PBXProject "Weather_Zebrev" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5C079F871F6C1EF100836669;
+			productRefGroup = 5C079F911F6C1EF100836669 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C079F8F1F6C1EF100836669 /* Weather_Zebrev */,
+				5C079FA31F6C1EF100836669 /* Weather_ZebrevTests */,
+				5C079FAE1F6C1EF100836669 /* Weather_ZebrevUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5C079F8E1F6C1EF100836669 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C079F9E1F6C1EF100836669 /* LaunchScreen.storyboard in Resources */,
+				5C079F9B1F6C1EF100836669 /* Assets.xcassets in Resources */,
+				5C079F991F6C1EF100836669 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C079FA21F6C1EF100836669 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C079FAD1F6C1EF100836669 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5C079F8C1F6C1EF100836669 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C079F961F6C1EF100836669 /* ViewController.swift in Sources */,
+				5C079F941F6C1EF100836669 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C079FA01F6C1EF100836669 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C079FA91F6C1EF100836669 /* Weather_ZebrevTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C079FAB1F6C1EF100836669 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C079FB41F6C1EF100836669 /* Weather_ZebrevUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5C079FA61F6C1EF100836669 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C079F8F1F6C1EF100836669 /* Weather_Zebrev */;
+			targetProxy = 5C079FA51F6C1EF100836669 /* PBXContainerItemProxy */;
+		};
+		5C079FB11F6C1EF100836669 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C079F8F1F6C1EF100836669 /* Weather_Zebrev */;
+			targetProxy = 5C079FB01F6C1EF100836669 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5C079F971F6C1EF100836669 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C079F981F6C1EF100836669 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5C079F9C1F6C1EF100836669 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C079F9D1F6C1EF100836669 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5C079FB61F6C1EF100836669 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5C079FB71F6C1EF100836669 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5C079FB91F6C1EF100836669 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Weather_Zebrev/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "home.Weather-Zebrev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		5C079FBA1F6C1EF100836669 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Weather_Zebrev/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "home.Weather-Zebrev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		5C079FBC1F6C1EF100836669 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = Weather_ZebrevTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "home.Weather-ZebrevTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather_Zebrev.app/Weather_Zebrev";
+			};
+			name = Debug;
+		};
+		5C079FBD1F6C1EF100836669 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = Weather_ZebrevTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "home.Weather-ZebrevTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather_Zebrev.app/Weather_Zebrev";
+			};
+			name = Release;
+		};
+		5C079FBF1F6C1EF100836669 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = Weather_ZebrevUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "home.Weather-ZebrevUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Weather_Zebrev;
+			};
+			name = Debug;
+		};
+		5C079FC01F6C1EF100836669 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = Weather_ZebrevUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "home.Weather-ZebrevUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Weather_Zebrev;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C079F8B1F6C1EF100836669 /* Build configuration list for PBXProject "Weather_Zebrev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C079FB61F6C1EF100836669 /* Debug */,
+				5C079FB71F6C1EF100836669 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C079FB81F6C1EF100836669 /* Build configuration list for PBXNativeTarget "Weather_Zebrev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C079FB91F6C1EF100836669 /* Debug */,
+				5C079FBA1F6C1EF100836669 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5C079FBB1F6C1EF100836669 /* Build configuration list for PBXNativeTarget "Weather_ZebrevTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C079FBC1F6C1EF100836669 /* Debug */,
+				5C079FBD1F6C1EF100836669 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5C079FBE1F6C1EF100836669 /* Build configuration list for PBXNativeTarget "Weather_ZebrevUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C079FBF1F6C1EF100836669 /* Debug */,
+				5C079FC01F6C1EF100836669 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5C079F881F6C1EF100836669 /* Project object */;
+}
