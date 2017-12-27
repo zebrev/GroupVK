@@ -8,8 +8,8 @@
 
 import Foundation
 import Alamofire
-import SwiftyVK
-
+import SwiftyJSON
+import RealmSwift
 
 /*
  //делаем запрос
@@ -70,6 +70,29 @@ import SwiftyVK
 
  */
 
+
+func  printPathRealData() {
+    do {
+        //  получаем  доступ к   хранилищу
+        let realm  = try  Realm( )
+        
+        print(realm.configuration.fileURL)
+    }
+    catch {
+        //  если  произошла  ошибка,  выводим  ее  в к онсоль
+        print(  error)
+    }
+    
+    
+    let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first 
+    let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first 
+    let tmpDirectory = FileManager.default.temporaryDirectory 
+    
+    print("cachesDirectory = \(cachesDirectory)")
+    print("documentsDirectory = \(documentsDirectory)")
+    print("tmpDirectory = \(tmpDirectory)")
+}
+
 class MainService {
  
     /*
@@ -78,7 +101,7 @@ class MainService {
      //let baseUrl = "https://oauth.vk.com"
      
      //запрос чтобы получить токен
-     //https://oauth.vk.com/authorize?client_id=6200602&display=page&redirect_uri=&scope=friends,photos,groups,offline&response_type=token&v=5.68
+     //https://oauth.vk.com/authorize?client_id=6223763&display=page&redirect_uri=&scope=friends,photos,groups,offline&response_type=token&v=5.68
 
      let path = "/authorize?"
      //параметры, город, еденицы измерения градусы, ключ для доступа к сервису
@@ -95,18 +118,22 @@ class MainService {
      let url = baseUrl+path
      */
 
-    let currentUserId = 35390381
+
+    static var currentUserId = 0       //35390381
    
     //ключ для доступа к сервису offline
-    let accessToken = "2317f563b87c4fde7cf98c23288ce39ba9977722c18a821924c2213f4535083cec4e7e3a7687ca9c87d59"
+    static var accessToken = ""        //
 
     //базовый url сервиса
     let baseUrl = "https://api.vk.com"
 
     //запрос на список друзей (5)
     //"https://api.vk.com/method/friends.search?count=5&v=5.68&access_token=" + accessToken
+  
 
-    func loadFriendVK(){
+    
+    //func loadFriendVK(completionHandler: @escaping () -> () ) {
+    func loadFriendVK() {
 
         let path = "/method/friends.search?"
 
@@ -115,46 +142,65 @@ class MainService {
 
         //параметры
         let parameters: Parameters = [
-            "count": 5,
-            "access_token": accessToken,
-            "v": "5.68"
+            "count": 15,
+            "access_token": MainService.accessToken,
+            "v": "5.68",
+            "fields" : "photo_200_orig,photo_50,nickname"
         ]
         
-       
+        //указываем другую очередь
+        Alamofire.request(url, method: .get, parameters: parameters).responseData(queue: .global(qos: .userInitiated)) {
+            response in
+
+            //guard let data = response.value else { return }
+            //print("\(response.result)\n")
+            switch response.result {
+            case .success(let value):
+                
+                //print("\nУспешно считали список друзей")
+
+                let json = JSON(value)
+                
+                //print(json)
+                //let  friend  = json["response"]["items"].flatMap {User (json: $0.1) }
+                let  friend  = json["response"]["items"].array?.flatMap {User (json: $0) } ?? []
+                //let  photo  = json["response"]["items"].array?.flatMap {Photo (json: $0) } ?? []
+                //print(friend)
+
+                //данные сохраняем в реалм в отдельном потоке что выше указан
+                Realm.replaceAllObjectOfType(toNewObjects: friend)
+                
+                //все сохраняется в базе данных - нет смысла хранить в замыканиях массив данных
+                //completionHandler(friend)
+                //completionHandler()
+                
+            case .failure(let error):
+                print("Error while quering database: \(String(describing: error))")
+                return
+            }
+        }
+
+        /*
         Alamofire.request(url, method: .get, parameters: parameters).responseData { (response) in
             
             print("\(response.result)\n")
             switch response.result {
             case .success(let value):
-                let json = JSON(value)
-                //print ("JSON: \(json)")
                 
-                //if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                //    print("Data: \(utf8Text)") // original server data as UTF8 string
-                //}
-
-                for (_, userJson) in json["response"]["items"] {
-                    
-                    let id = userJson["id"].intValue
-                    let name = userJson["first_name"].stringValue
-                    let username = userJson["last_name"].stringValue
-                    
-                    print("id friend = \(id)", name, username)
-                    
-                    
-                }
+                let json = JSON(value)
+                let  friend  = json["response"]["items"].flatMap {User (json: $0.1) }
+                print(friend)
 
             case .failure(let error):
                 print("Error while quering database: \(String(describing: error))")
                 return
             }
         }
-        
+*/
     }
 
-    
    
-    func loadFriendFotoVK(){
+    func loadFriendFotoVK(forUser user: Int, completionHandler: @escaping ([Photo]) -> Void){
         
         
         let path = "/method/photos.get?"
@@ -164,33 +210,35 @@ class MainService {
         
         //параметры
         let parameters: Parameters = [
-            "owner_id": currentUserId,
+            "owner_id": user,
             "album_id": "profile",
-            "count": 5,
-            "access_token": accessToken,
+            "count": 200,
+            "access_token": MainService.accessToken,
             "v": "5.68"
         ]
         
         
-        Alamofire.request(url, method: .get, parameters: parameters).responseData { (response) in
+        Alamofire.request(url, method: .get, parameters: parameters).responseData(queue: .global(qos: .userInitiated)) { (response) in
             
-            print("\(response.result)\n")
+//            print("\(response.result)\n")
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                //print ("JSON: \(json)")
+//                print ("JSON: \(json)")
+
+                //print("\nУспешно считали фото")
                 
-                for (_, userJson) in json["response"]["items"] {
-                    
-                    let id = userJson["id"].intValue
-                    let photo2560 = userJson["photo_2560"].stringValue
-                    let countLike = userJson["likes"]["count"].intValue
-                    
-                    print("id photo = \(id)", photo2560, countLike)
-                    
-                    
+                let  photo  = json["response"]["items"].flatMap {Photo (json: $0.1) }
+
+                //Realm.replaceAllObjectOfType(toNewObjects: photo)
+                
+                DispatchQueue.main.async {
+                                    completionHandler(photo)
                 }
-                
+
+
+
+
             case .failure(let error):
                 print("Error while quering database: \(String(describing: error))")
                 return
@@ -201,7 +249,8 @@ class MainService {
 
     
     
-    func loadGroupVK(){
+    //func loadGroupVK(completionHandler: @escaping () -> () ){
+    func loadGroupVK() {
         
         
         let path = "/method/groups.get?"
@@ -211,23 +260,33 @@ class MainService {
         
         //параметры
         let parameters: Parameters = [
-            "user_id": currentUserId,
+            "user_id": MainService.currentUserId,
             "extended":1,
             "count": 5,
-            "access_token": accessToken,
-            "v": "5.68"
+            "access_token": MainService.accessToken,
+            "v": "5.68",
+            "fields": "members_count"           //+опциональные дополнительные поля
         ]
         
         
-        Alamofire.request(url, method: .get, parameters: parameters).responseData { (response) in
+        Alamofire.request(url, method: .get, parameters: parameters).responseData(queue: .global(qos: .userInitiated)) { (response) in
             
-            print("\(response.result)\n")
+            //print("\(response.result)\n")
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
+
                 //print ("JSON: \(json)")
+
+                //print("\nУспешно считали список групп")
                 
-               
+                let  group  = json["response"]["items"].array?.flatMap {Group (json: $0) } ?? []
+                
+                Realm.replaceAllObjectOfType(toNewObjects: group)
+
+                //completionHandler()
+
+/*
                 for (_, userJson) in json["response"]["items"] {
                     
                     let id = userJson["id"].intValue
@@ -236,6 +295,203 @@ class MainService {
                     print("id group = \(id)", name)
                     
                     
+                }
+  */
+            case .failure(let error):
+                print("Error while quering database: \(String(describing: error))")
+                return
+            }
+        }
+        
+    }
+
+    
+    func loadAndSearchGroupVK(searchText: String, completionHandler: @escaping ([Group]) -> () ){
+        
+        
+        let path = "/method/groups.search?"
+        
+        //составляем url из базового адреса сервиса и кокртетного пути к ресурсу
+        let url = baseUrl+path
+        
+        //параметры
+        let parameters: Parameters = [
+            "count": 20,
+            "access_token": MainService.accessToken,
+            "v": "5.68",
+            "q": searchText
+        ]
+        
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseData(queue: .global(qos: .userInitiated)) { (response) in
+            
+            //print("\(response.result)\n")
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                //                print ("JSON: \(json)")
+                
+//                print("\nПоиск групп завершен")
+                
+                let  group  = json["response"]["items"].flatMap {Group (json: $0.1) }
+             
+                DispatchQueue.main.async {
+                    completionHandler(group)
+                }
+
+
+                
+            case .failure(let error):
+                print("Error while quering database: \(String(describing: error))")
+                return
+            }
+        }
+        
+    }
+
+   
+    func loadFriends() -> [User] {
+        do {
+            let realm = try Realm()
+//            let user  = realm.objects(User.self)
+//            self.user  =  Array(user)
+            return Array(realm.objects(User.self))
+        } catch {
+            print(error)
+            return []
+        }
+    }
+
+    
+    func loadGroups() -> [Group] {
+        do {
+            let realm = try Realm()
+            return Array(realm.objects(Group.self))
+        } catch {
+            print(error)
+            return []
+        }
+    }
+
+    func joinToGroup(groupID: Int, completion: @escaping () -> () ) {
+
+        let path = "/method/groups.join?"
+        
+        //составляем url из базового адреса сервиса и кокртетного пути к ресурсу
+        let url = baseUrl+path
+        
+        //параметры
+        let parameters: Parameters = [
+            "group_id": groupID,
+            "access_token": MainService.accessToken,
+            "v": "5.68"
+        ]
+
+        Alamofire.request(url, method: .get, parameters: parameters).responseData(queue: .global(qos: .userInitiated)) { response in
+            completion()
+        }
+    }
+    
+    func leaveFromGroup(groupID: Int, completion: @escaping () -> () ) {
+        
+        let path = "/method/groups.leave?"
+        
+        //составляем url из базового адреса сервиса и кокртетного пути к ресурсу
+        let url = baseUrl+path
+        
+        //параметры
+        let parameters: Parameters = [
+            "group_id": groupID,
+            "access_token": MainService.accessToken,
+            "v": "5.68"
+        ]
+
+        Alamofire.request(url, method: .get, parameters: parameters).responseData(queue: .global(qos: .userInitiated)) { response in
+            completion()
+        }
+    }
+
+    
+    
+    private let parser: JsonParser1 = ParserFactory().newsFeed()
+    
+    func downloadsNews(completionHandler: @escaping ([News]) -> Void){
+        
+        var path = "/method/newsfeed.get"
+        
+        var parameters: Parameters {
+            return [
+                "filters": "post,photo",
+                "access_token": MainService.accessToken,
+                "v": "5.68",
+                "count": 20
+            ]
+        }
+
+        //составляем url из базового адреса сервиса и кокртетного пути к ресурсу
+        let url = baseUrl+path
+       
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseData(queue: .global(qos: .userInitiated)) { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                
+                //print ("JSON: \(json)")
+                
+                //let  news  = json["response"]["items"].flatMap {News (json: $0.1) }
+                let news = self.parser.parse(json) as? [News]
+                
+                //добавляю асинхронную загрузку данных
+                DispatchQueue.main.async {
+                    completionHandler(news ?? [])
+                }
+
+//                completionHandler(news ?? [])
+
+                //Realm.replaceAllObjectOfType(toNewObjects: photo)
+                
+//                completionHandler(news)
+            case .failure(let error):
+                print("Error while quering database: \(String(describing: error))")
+                return
+            }
+        }
+        
+    }
+
+
+    
+    //private let parserWalls: JsonParser1 = ParserFactory().newsFeed()
+    
+    func downloadsWalls(completionHandler: @escaping ([Walls]) -> Void){
+        
+        var path = "/method/wall.get"
+        
+        var parameters: Parameters {
+            return [
+                "owner_id": MainService.currentUserId,
+                "access_token": MainService.accessToken,
+                "v": "5.68",
+                "count": 20
+            ]
+        }
+        
+        //составляем url из базового адреса сервиса и кокртетного пути к ресурсу
+        let url = baseUrl+path
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseData(queue: .global(qos: .userInitiated)) { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                
+                print ("walls JSON: \(json)")
+                
+                let walls  = json["response"]["items"].flatMap {Walls (json: $0.1) }
+
+                //добавляю асинхронную загрузку данных
+                DispatchQueue.main.async {
+                    completionHandler(walls)
                 }
                 
             case .failure(let error):
@@ -246,5 +502,43 @@ class MainService {
         
     }
 
-    
+
+    func postWall(message: String?, attachments: String?, completion: @escaping (String) -> Void) {
+        
+        let path = "/method/wall.post?"
+        
+        //составляем url из базового адреса сервиса и кокртетного пути к ресурсу
+        let url = baseUrl+path
+
+        //параметры
+        var parameters: Parameters = [
+            "owner_id": MainService.currentUserId,
+            "access_token": MainService.accessToken,
+            "v": "5.68"
+        ]
+
+        if let attachments = attachments {
+            parameters["attachments"] = attachments
+        }
+        if let message1 = message {
+            parameters["message"] = message1
+        }
+
+        Alamofire.request(url, method: .get, parameters: parameters).responseData(queue: .global(qos: .userInitiated)) { response in
+
+            switch response.result {
+            case .success(let value):
+                
+                //print("value = \(value)")
+                completion("success")
+                
+            case .failure(let error):
+                print("Error while quering database: \(String(describing: error))")
+                return
+            }
+
+        }
+    }
+
+
 }

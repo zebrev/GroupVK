@@ -7,11 +7,8 @@
 //
 
 import Foundation
-import SwiftyVK
-import RealmSwift
 
-
-class News : Object {
+class News {
     var id                  = 0
     var sourceId            = 0
     var likesCount          = 0
@@ -22,20 +19,6 @@ class News : Object {
     var photoLink: String?
     var user: User?
     var group: Group?
-/*
-    override  static func  primaryKey( ) -> String? {
-        return "id"
-    }
-    
-    convenience init( json:   JSON)  {
-        
-        self.init()
-        
-        id         = json["id"].intValue
-        name       = json["name"].stringValue
-        photo      = json["photo_200"].stringValue
-        countUser  = json["members_count"].intValue
-    }
-  */
+
 }
 

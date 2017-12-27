@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct ParserFactory {
+    
+    func newsFeed() -> JsonParser1 {
+        return ParserFactory.NewsFeed()
+    }
+}
+

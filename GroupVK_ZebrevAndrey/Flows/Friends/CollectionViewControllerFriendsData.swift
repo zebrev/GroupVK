@@ -18,11 +18,15 @@ class CollectionViewControllerFriendsData: UICollectionViewController {
     var userId      = 0
 
     let mainService = MainService()
-    let photoService = PhotoService()
-
+    lazy var  photoService = PhotoService(container: collectionView!)
     var photos = [Photo]()
-    var photosCache: [Int: UIImage] = [:]
 
+    let queue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.qualityOfService = .userInteractive
+        return queue
+        }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,15 +64,46 @@ class CollectionViewControllerFriendsData: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendsDataCell", for: indexPath) as! CollectionViewCellFriendsData
-       
+        /*
         if let photo = photosCache[indexPath.row] {
             cell.FriendsDataCellImage.image = photo
         } else {
             loadPhotos(indexPath: indexPath)
         }
-
+*/
 //        cell.FriendsDataCellImage.setImageFromURl(stringImageUrl: photo)
 
+        //третий рефакторинг
+        //cell.FriendsDataCellImage.image = photoService.photo(atIndexpath: indexPath, byUrl: photos[indexPath.row].photoUrl)
+        
+        //print("indexPath1 = \(indexPath), url1 = \(photos[indexPath.row].photoUrl)")
+        
+        let getCacheImage = GetCacheImage(url:photos[indexPath.row].photoUrl)
+        
+        //создали задачу установки фото
+        let setImageToRow = SetImageToRow(cell: cell, indexPath: indexPath, collectionView: collectionView)
+        //сделали ее зависимой от загрузки фото
+        setImageToRow.addDependency(getCacheImage) 
+        /*
+        getCacheImage.completionBlock = {
+            OperationQueue.main.addOperation {
+                cell.FriendsDataCellImage.image = getCacheImage.outputImage
+                }
+            
+        }*/
+        //добавили в очередь загрузку фото
+        //queue.addOperation(getCacheImage)
+        //OperationQueue.main.addOperation(getCacheImage)
+
+        queue.addOperation(getCacheImage)
+
+        //добавили установку фото в главную очередь
+        OperationQueue.main.addOperation(setImageToRow)
+        
+        let textLabel = String(indexPath.row) + " " + photos[indexPath.row].photoUrl
+        cell.setLabel(text: textLabel)
+        //cell.FriendsDataCellLabel.text=String(indexPath.row) + " " + photos[indexPath.row].photoUrl
+        
         return cell
     }
 
@@ -78,13 +113,14 @@ class CollectionViewControllerFriendsData: UICollectionViewController {
             self?.collectionView?.reloadData()
         }
     }
-    
+
+    /*
     func loadPhotos(indexPath: IndexPath) {
         photoService.downloadPhoto(byUrl: photos[indexPath.row].photoUrl) { [weak self] image in
             self?.photosCache[indexPath.row] = image
             self?.collectionView?.reloadItems(at: [indexPath])
         }
     }
-
+*/
     
 }

@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import SwiftyVK
-import  RealmSwift
+import SwiftyJSON
+import RealmSwift
 
 
 class Group : Object {

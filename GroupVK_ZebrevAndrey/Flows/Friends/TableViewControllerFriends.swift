@@ -14,15 +14,13 @@ class TableViewControllerFriends: UITableViewController {
     //создаем экземпляр сервиса
     let mainService = MainService()
     
-    let photoService = PhotoService()
+    lazy var  photoService = PhotoService(container: tableView)
     
     //var arrUser = [User]()
 
     var users   : Results<User>?
     var token   : NotificationToken?            //токен для уведомлений из базы
-
-    //массив фото друзей
-    var usersPhoto: [Int: UIImage] = [:]
+    var photos = [Photo]()
 
     
     /*
@@ -92,20 +90,23 @@ class TableViewControllerFriends: UITableViewController {
         //или универсально или конкретно оутлет указываем
         //cell.imageView?.setImageFromURl(stringImageUrl: arrUser[indexPath.row].photo)
         //cell.FriendsCellImage.setImageFromURl(stringImageUrl: user.photo50)
-        
+
+        /*
         if let photo = usersPhoto[indexPath.row] {
             cell.FriendsCellImage.image = photo
         }
         else {
             loadPhotos(indexPath: indexPath)
         }
-        
+        */
+
+        cell.FriendsCellImage.image = photoService.photo(atIndexpath: indexPath, byUrl: user.photoUrl)
         // Configure the cell...
 
         return cell
     }
     
-
+/*
     func loadPhotos(indexPath: IndexPath) {
         
         guard let photo = users?[indexPath.row].photo50Url else { return }
@@ -114,7 +115,7 @@ class TableViewControllerFriends: UITableViewController {
             self?.tableView.reloadRows(at: [indexPath], with: .none)
         }
     }
-
+*/
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueMyFriend",
@@ -140,7 +141,7 @@ class TableViewControllerFriends: UITableViewController {
         guard let realm  = try? Realm()  else { return }
         
         users  = realm.objects(User.self)
-        token  = users?.addNotificationBlock {  [  weak  self]  (  changes:   RealmCollectionChange)  in
+        token  = users?.observe {  [  weak  self]  (  changes:   RealmCollectionChange)  in
             guard let tableView = self?.tableView  else { return }
             switch  changes {
 

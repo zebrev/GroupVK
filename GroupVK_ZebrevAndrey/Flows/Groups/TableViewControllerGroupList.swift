@@ -153,7 +153,7 @@ class TableViewControllerGroupList: UITableViewController {
         guard let realm  = try? Realm()  else { return }
         
         groups  = realm.objects(Group.self)
-        token  = groups?.addNotificationBlock {  [  weak  self]  (  changes:   RealmCollectionChange)  in
+        token  = groups?.observe {  [  weak  self]  (  changes:   RealmCollectionChange)  in
             guard let tableView = self?.tableView  else { return }
             switch  changes {
                 

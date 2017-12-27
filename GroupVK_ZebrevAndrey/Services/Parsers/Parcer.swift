@@ -7,4 +7,8 @@
 //
 
 import Foundation
+import SwiftyJSON
 
+protocol JsonParser1 {
+    func parse(_ json: JSON) -> [AnyObject]
+}

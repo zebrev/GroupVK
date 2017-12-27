@@ -7,14 +7,16 @@
 //
 
 import Foundation
-import SwiftyVK
-import  RealmSwift
+import SwiftyJSON
+import RealmSwift
 
 class User : Object {
      @objc  dynamic  var id:Int          = 0
      @objc  dynamic  var firstName       = ""
      @objc  dynamic  var lastName        = ""
      @objc  dynamic  var nickname        = ""
+
+     //не всегда указано photo_200_orig
      @objc  dynamic  var photoUrl        = ""
      @objc  dynamic  var photo50Url      = ""
      @objc  dynamic  var example         = "user"       //test
@@ -36,7 +38,7 @@ class User : Object {
     }
 
     
-    convenience init( json:   JSON)  {
+    convenience init(json:JSON) {
         
         self.init()
         
@@ -71,7 +73,7 @@ extension  User {
     //имплементируем протокол для вывода в консоль
     override var description:   String {
         
-        return  "\nПользователь \(id) - \(fullName)"
+        return  "\nПользователь \(id) - \(fullName). photoUrl=\(photoUrl), photo50Url=\(photo50Url)"
     }
 }
 

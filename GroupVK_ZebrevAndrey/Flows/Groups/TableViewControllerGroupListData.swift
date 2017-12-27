@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class TableViewControllerGroupListData: UITableViewController {
 
@@ -101,6 +102,11 @@ class TableViewControllerGroupListData: UITableViewController {
         let id = filterGroups[indexPath.row].id
         mainService.joinToGroup(groupID: id) { [weak self] in
             self?.performSegue(withIdentifier: "addGroup", sender: nil)
+            
+            let enterGroup = EnteredGroup(groupId:id)
+            let dbLink  =  Database .database().reference()
+            //setValue(data)
+            dbLink.child( "user/\(MainService.currentUserId)/joinGroup" ).updateChildValues(["\(enterGroup.groupId)": enterGroup.toAnyObject])
         }
     }
 

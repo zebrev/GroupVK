@@ -10,15 +10,17 @@ import UIKit
 
 class WallTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var mainText: UILabel!
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+/*
+        @IBOutlet weak var autorAvatar: UIImageView!
+        @IBOutlet weak var autorName: UILabel!
+        @IBOutlet weak var mainImage: UIImageView!
+        @IBOutlet weak var mainText: UILabel!
+        @IBOutlet weak var likeCount: UILabel!
+        @IBOutlet weak var commentCount: UILabel!
+        @IBOutlet weak var repostCount: UILabel!
+        @IBOutlet weak var viewsCount: UILabel!
+ */
 }

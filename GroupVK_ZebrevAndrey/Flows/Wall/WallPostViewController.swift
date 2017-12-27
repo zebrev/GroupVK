@@ -1,17 +1,22 @@
 //
-//  TabVKController.swift
+//  WallPostViewController.swift
 //  GroupVK_ZebrevAndrey
 //
-//  Created by Rapax on 30.10.17.
+//  Created by Rapax on 21.12.2017.
 //  Copyright © 2017 Rapax. All rights reserved.
 //
 
 import UIKit
 
-class TabVKController: UITabBarController, TabsVK {
-
-    var token: String = ""
+class WallPostViewController: UIViewController {
     
+    let mainService = MainService()
+    
+    @IBOutlet weak var TextPost: UITextField!
+    
+    @IBOutlet weak var TextCoordinates: UITextView!
+       
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 

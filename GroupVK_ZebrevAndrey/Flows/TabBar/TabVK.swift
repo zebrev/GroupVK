@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol TabsVK: class {
+    var token: String { get }
+}

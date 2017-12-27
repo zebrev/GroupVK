@@ -24,8 +24,12 @@ class GetCacheImage: Operation {
     }()
 
     private lazy var filePath: String? = { guard let cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
+        
+        
         let hasheName = String(describing: url.hashValue)
-        return cachesDirectory.appendingPathComponent(GetCacheImage.pathName + "/" + hasheName).path
+        
+        //print("url get = \(url), hasheName = \(hasheName)")
+        return cachesDirectory.appendingPathComponent(GetCacheImage.pathName + "/" + hasheName + ".jpg").path
         
     }()
     
@@ -34,7 +38,6 @@ class GetCacheImage: Operation {
     
     init(url: String) {
         self.url = url
-        
     }
 
     override func main() {
@@ -61,6 +64,8 @@ class GetCacheImage: Operation {
         guard lifeTime <= cacheLifeTime,
             let image = UIImage(contentsOfFile: fileName) else { return false }
         
+        //print("fileName= \(fileName)")
+        
         self.outputImage = image
         return true
         
@@ -83,25 +88,5 @@ class GetCacheImage: Operation {
         FileManager.default.createFile(atPath: fileName, contents: data, attributes: nil)
     }
 
-}
-
-class SetImageToRow: Operation {
-    private let indexPath: IndexPath
-    private weak var collectionView: UICollectionView?
-
-    init(indexPath: IndexPath, collectionView: UICollectionView) {
-        self.indexPath = indexPath
-        self.collectionView = collectionView
-        
-    }
-    
-    override func main() {
-        guard let collectionView = collectionView,
-            let getCacheImage = dependencies[0] as? GetCacheImage,
-            let image = getCacheImage.outputImage else { return }
-            if let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCellFriendsData  {
-                cell.FriendsDataCellImage.image = image
-        }
-    }
 }
 
